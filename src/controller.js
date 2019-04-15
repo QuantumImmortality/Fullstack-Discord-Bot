@@ -1,6 +1,8 @@
 const auth = require('../config/credentials.json');
 const commandPrefix = require('../config/config.json').commandPrefix
-const output = require('./Output/out.js')
+const commandManager = require('./input/commandManager.js');
+
+const output = require('./output/out.js')
 const Discord = require('discord.js')
 const client = new Discord.Client()
 
@@ -20,10 +22,9 @@ client.on('ready', () => {
 
 client.on('message', msg => {
     if (msg.author.bot || !msg.content.startsWith(commandPrefix)) return;
-    let command = msg.content.substr(1)
-    output.sendMessage(client, "Message Received: " + command)
-    //let args = msg.content.slice(commandChar.length).trim().split(' ');
-    //let cmd = args.shift().toLowerCase();
+    let args = msg.content.substr(1).trim().split(' ')
+    let cmd = args.shift().toLowerCase();
+    msg.channel.send("Message Received: " + cmd + " " + args)
 
-    //commandService.handle(client, msg, cmd, args);
+    commandManager.handle(client, msg, cmd, args);
 });
