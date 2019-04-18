@@ -6,4 +6,4 @@ exports.handle = async (client, message, command, args) => {
     } catch (e) {
         message.channel.send(`Not a valid command!`);
     }
-}
+};
