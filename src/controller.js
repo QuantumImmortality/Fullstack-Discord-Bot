@@ -1,11 +1,13 @@
 const auth = require('../config/credentials.json').token;
 const commandPrefix = require('../config/config.json').commandPrefix;
 const commandManager = require('./input/commandManager.js');
+const mongclient = require('./mongoDB/connect');
 
 const output = require('./output/out.js');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
+mongclient.connectDB();
 client.login(auth);
 
 client.on('ready', () => {
@@ -18,6 +20,7 @@ client.on('ready', () => {
             console.log(` -- ${channel.name} (${channel.type}) - ${channel.id}`)
         })
     })
+
 });
 
 client.on('message', msg => {
