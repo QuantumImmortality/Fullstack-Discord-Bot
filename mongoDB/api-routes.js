@@ -11,18 +11,18 @@ router.get('/', function (req, res) {
 });
 
 // Import contact controller
-var contactController = require('./contactController');
+var memeController = require('./memeController');
 
 // Contact routes
-router.route('/contacts')
-    .get(contactController.index)
-    .post(contactController.new);
+router.route('/memes')
+    .get(memeController.index)
+    .post(memeController.new);
 
-router.route('/contacts/:contact_id')
-    .get(contactController.view)
-    .patch(contactController.update)
-    .put(contactController.update)
-    .delete(contactController.delete);
+router.route('/memes/:meme_id')
+    .get(memeController.view)
+    .patch(memeController.update)
+    .put(memeController.update)
+    .delete(memeController.delete);
 
 // Export API routes
 module.exports = router;
