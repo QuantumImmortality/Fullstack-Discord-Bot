@@ -1,7 +1,7 @@
 const commands = require('./commands/commandsIndex');
-const mongclient = require('../mongoDB/connect');
+//const mongclient = require('../mongoDB/connect');
 
-exports.handle = async (client, message, command, args) => {
+/*exports.handle = async (client, message, command, args) => {
 
     console.log("in comMan");
 
@@ -16,4 +16,4 @@ exports.handle = async (client, message, command, args) => {
     } catch (e) {
         message.channel.send(`Not a valid command!`);
     }
-};
+};*/
