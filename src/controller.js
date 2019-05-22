@@ -30,15 +30,9 @@ client.on('message', msg => {
     let cmd = args.shift().toLowerCase();
     msg.channel.send("Message Received: " + cmd + " " + args);
 
-    db.GET('http://35.243.224.195:8080/api/memes').then(function(response) {
-       console.log("A PROMISING Success! \n", JSON.parse(response).data[0].source);
-       let json = JSON.parse(response).data[0].source;
-        msg.channel.send(json);
-    }, function(error) {
-        console.error("Failed!", error);
-        msg.channel.send(error);
-    });
 
 
-    //commandManager.handle(client, msg, cmd, args);
+    /**/
+
+    commandManager.handle(client, msg, cmd, args);
 });
