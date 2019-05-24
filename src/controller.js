@@ -1,14 +1,12 @@
 const auth = require('../config/credentials.json').token;
 const commandPrefix = require('../config/config.json').commandPrefix;
 const commandManager = require('./input/commandManager');
-//const mongclient = require('./mongoDB/connect');
 
 const output = require('./output/out');
 const Discord = require('discord.js');
 const db = require('./mongoDB/dbCommands');
 const client = new Discord.Client();
 
-//mongclient.connectDB();
 client.login(auth);
 
 client.on('ready', () => {
@@ -29,10 +27,6 @@ client.on('message', msg => {
     let args = msg.content.substr(1).trim().split(' ');
     let cmd = args.shift().toLowerCase();
     msg.channel.send("Message Received: " + cmd + " " + args);
-
-
-
-    /**/
 
     commandManager.handle(client, msg, cmd, args);
 });

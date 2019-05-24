@@ -1,4 +1,5 @@
 const request = require('request');
+const strClean = require('../cleanse/inputClean');
 
 async function get(url) {
 
@@ -27,13 +28,12 @@ async function post(url, args) {
     // Return a new promise.
     return new Promise(function(resolve, reject) {
         // Do the usual XHR stuff
-
-        console.log("BODY: " + encodeURIComponent('&'));
+        //console.log("ARGS: " + args[0] + " " + args[1] + " replacement:  " + strClean.replaceAll(args[1], "&", "%26" ));
+        //console.log("BODY: " + encodeURIComponent('&'));
         request.post({
             url: url,
             json: true,
-            //body: 'name=Slipknot&source=https://www.youtube.com/watch?time_continue=20' + encodeURIComponent('&') + 'v=VpATBBRajP8',
-            body: 'name=duality&source=https://www.youtube.com/watch?v=6fVE8kSM43I',
+            body: `name=${args[0]}&source=${strClean.replaceAll(args[1], "&", "%26" )}`,
             headers: {'content-type' : 'application/x-www-form-urlencoded'}
         }, (err, res, data) => {
             if (err) {

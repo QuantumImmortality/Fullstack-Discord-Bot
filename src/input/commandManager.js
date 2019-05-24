@@ -7,3 +7,4 @@ exports.handle = async (client, message, command, args) => {
         message.channel.send(`Not a valid command!`);
     }
 };
+
