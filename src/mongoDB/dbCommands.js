@@ -28,12 +28,10 @@ async function post(url, args) {
     // Return a new promise.
     return new Promise(function(resolve, reject) {
         // Do the usual XHR stuff
-        //console.log("ARGS: " + args[0] + " " + args[1] + " replacement:  " + strClean.replaceAll(args[1], "&", "%26" ));
-        //console.log("BODY: " + encodeURIComponent('&'));
         request.post({
             url: url,
             json: true,
-            body: `name=${args[0]}&source=${strClean.replaceAll(args[1], "&", "%26" )}`,
+            body: `name=${args[0].toLowerCase()}&source=${strClean.replaceAll(args[1], "&", "%26" )}`,
             headers: {'content-type' : 'application/x-www-form-urlencoded'}
         }, (err, res, data) => {
             if (err) {
@@ -70,7 +68,7 @@ async function delete_meme(url) {
     });
 }
 
-async function put(url) {
+async function put(url, args) {
 
     // Return a new promise.
     return new Promise(function(resolve, reject) {
@@ -78,8 +76,9 @@ async function put(url) {
         request.put({
             url: url,
             json: true,
-            headers: {'User-Agent': 'request'}
-        }, (err, res, data) => {
+            body: `name=${args[1].toLowerCase()}&source=${strClean.replaceAll(args[2], "&", "%26" )}`,
+            headers: {'content-type' : 'application/x-www-form-urlencoded'}
+            }, (err, res, data) => {
             if (err) {
                 reject('Error:', err);
             } else if (res.statusCode !== 200) {

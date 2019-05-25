@@ -19,14 +19,13 @@ client.on('ready', () => {
             console.log(` -- ${channel.name} (${channel.type}) - ${channel.id}`)
         })
     })
-
 });
 
 client.on('message', msg => {
     if (msg.author.bot || !msg.content.startsWith(commandPrefix)) return;
     let args = msg.content.substr(1).trim().split(' ');
     let cmd = args.shift().toLowerCase();
-    msg.channel.send("Message Received: " + cmd + " " + args);
+    //msg.channel.send("Message Received: " + cmd + " " + args);
 
     commandManager.handle(client, msg, cmd, args);
 });
