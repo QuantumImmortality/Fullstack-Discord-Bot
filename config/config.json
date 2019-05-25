@@ -1,3 +1,4 @@
 {
-  "commandPrefix":"!"
+  "commandPrefix":"!",
+  "dbEndpoint":"http://35.243.224.195:8080/api/memes/"
 }

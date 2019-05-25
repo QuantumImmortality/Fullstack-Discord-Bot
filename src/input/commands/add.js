@@ -1,4 +1,5 @@
 const db = require('../../mongoDB/dbCommands');
+const endpoint = require('../../../config/config.json').dbEndpoint;
 
 /**
  * Add a meme to the database
@@ -10,8 +11,8 @@ const db = require('../../mongoDB/dbCommands');
 exports.run = async (client, message, args) => {
 
     if(args.length >= 2) {
-        db.post('http://35.243.224.195:8080/api/memes', args).then(function (response) {
-            message.channel.send(JSON.parse(response).message);
+        db.post(endpoint, args).then(function (response) {
+            message.channel.send(response.message);
         }, function (error) {
             console.error("Failed!", error);
             message.channel.send(error);

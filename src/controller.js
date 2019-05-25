@@ -9,6 +9,9 @@ const client = new Discord.Client();
 
 client.login(auth);
 
+/**
+ * On initial bot launch, list the channels and server name
+ */
 client.on('ready', () => {
     // List servers the bot is connected to
     client.guilds.forEach((guild) => {
@@ -21,11 +24,13 @@ client.on('ready', () => {
     })
 });
 
+/**
+ * Listener for when a message is sent in discord chat
+ */
 client.on('message', msg => {
     if (msg.author.bot || !msg.content.startsWith(commandPrefix)) return;
     let args = msg.content.substr(1).trim().split(' ');
     let cmd = args.shift().toLowerCase();
-    //msg.channel.send("Message Received: " + cmd + " " + args);
 
     commandManager.handle(client, msg, cmd, args);
 });

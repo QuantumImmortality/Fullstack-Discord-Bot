@@ -1,4 +1,5 @@
 const db = require('../../mongoDB/dbCommands');
+const endpoint = require('../../../config/config.json').dbEndpoint;
 
 /**
  * Get a meme from the database
@@ -8,10 +9,12 @@ const db = require('../../mongoDB/dbCommands');
  * @returns {Promise<void>}
  */
 exports.run = async (client, message, args) => {
-    db.get('http://35.243.224.195:8080/api/memes/' + args.toLowerCase()).then(function(response) {
-        if(JSON.parse(response).data.length) {
-            let json = JSON.parse(response).data[0].source;
+    db.get(endpoint + args.toString().toLowerCase()).then(function(response) {
+        if(response.data.length) {
+            let json = response.data[0].source;
             message.channel.send(json);
+        } else {
+            message.channel.send("meme does not yet exist, why not add it?");
         }
     }, function(error) {
         console.error("Failed get! ", error);

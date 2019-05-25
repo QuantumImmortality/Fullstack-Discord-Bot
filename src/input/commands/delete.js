@@ -1,4 +1,5 @@
 const db = require('../../mongoDB/dbCommands');
+const endpoint = require('../../../config/config.json').dbEndpoint;
 
 /**
  * Function to delete memes from the database
@@ -9,8 +10,8 @@ const db = require('../../mongoDB/dbCommands');
  */
 exports.run = async (client, message, args) => {
     if(args[0].length === 24) {
-        db.delete_meme('http://35.243.224.195:8080/api/memes/' + args).then(function (response) {
-            message.channel.send(JSON.parse(response).message);
+        db.delete_meme(endpoint + args).then(function (response) {
+            message.channel.send(response.message);
         }, function (error) {
             console.error("Failed get! ", error);
             message.channel.send(error);

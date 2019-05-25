@@ -1,6 +1,11 @@
 const request = require('request');
 const strClean = require('../cleanse/inputClean');
 
+/**
+ * Send a get request to the database to retrieve meme
+ * @param url the target endpoint + name of meme
+ * @returns {Promise<*>}
+ */
 async function get(url) {
 
     // Return a new promise.
@@ -17,12 +22,18 @@ async function get(url) {
                 reject('Status:', res.statusCode);
             } else {
                 // data is already parsed as JSON:
-                resolve(JSON.stringify(data));
+                resolve(data);
             }
         });
     });
 }
 
+/**
+ * Add a new meme to the database via post request
+ * @param url target endpoint
+ * @param args includes name of meme and source
+ * @returns {Promise<*>}
+ */
 async function post(url, args) {
 
     // Return a new promise.
@@ -31,7 +42,7 @@ async function post(url, args) {
         request.post({
             url: url,
             json: true,
-            body: `name=${args[0].toLowerCase()}&source=${strClean.replaceAll(args[1], "&", "%26" )}`,
+            body: `name=${args[0].toString().toLowerCase()}&source=${strClean.replaceAll(args[1], "&", "%26" )}`,
             headers: {'content-type' : 'application/x-www-form-urlencoded'}
         }, (err, res, data) => {
             if (err) {
@@ -40,12 +51,17 @@ async function post(url, args) {
                 reject('Status:', res.statusCode);
             } else {
                 // data is already parsed as JSON:
-                resolve(JSON.stringify(data));
+                resolve(data);
             }
         });
     });
 }
 
+/**
+ * Remove a meme from the database
+ * @param url the target endpoint + id of meme
+ * @returns {Promise<*>}
+ */
 async function delete_meme(url) {
 
     // Return a new promise.
@@ -62,12 +78,18 @@ async function delete_meme(url) {
                 reject('Status:', res.statusCode);
             } else {
                 // data is already parsed as JSON:
-                resolve(JSON.stringify(data));
+                resolve(data);
             }
         });
     });
 }
 
+/**
+ * Update an existing meme in the db
+ * @param url target end point + id of meme
+ * @param args includes the id, name, and source of meme
+ * @returns {Promise<*>}
+ */
 async function put(url, args) {
 
     // Return a new promise.
@@ -76,7 +98,7 @@ async function put(url, args) {
         request.put({
             url: url,
             json: true,
-            body: `name=${args[1].toLowerCase()}&source=${strClean.replaceAll(args[2], "&", "%26" )}`,
+            body: `name=${args[1].toString().toLowerCase()}&source=${strClean.replaceAll(args[2], "&", "%26" )}`,
             headers: {'content-type' : 'application/x-www-form-urlencoded'}
             }, (err, res, data) => {
             if (err) {
@@ -85,11 +107,12 @@ async function put(url, args) {
                 reject('Status:', res.statusCode);
             } else {
                 // data is already parsed as JSON:
-                resolve(JSON.stringify(data));
+                resolve(data);
             }
         });
     });
 }
+
 module.exports = {
     get: get,
     post:post,
