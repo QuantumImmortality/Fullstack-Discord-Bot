@@ -2,3 +2,4 @@
 /.idea/*
 /config/credentials.json
 config/credentials.json
+*.json
