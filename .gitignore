@@ -1,3 +1,4 @@
 /node_modules/
 /.idea/*
 /config/credentials.json
+config/credentials.json
