@@ -12,10 +12,9 @@
       <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
         <div class="example-element-diagram">
-          <div class="example-element-position"> {{element.source}} </div>
-          <div class="example-element-symbol"> {{element.source}} </div>
-          <div class="example-element-name"> {{element.name}} </div>
-          <div class="example-element-weight"> {{element.name}} </div>
+<div class="example-element-symbol" *ngIf = 'isYoutube(element.source); else elseBlock'> <iframe width="560" height="315" [src]= 'sanitizer.bypassSecurityTrustResourceUrl(getId(element.source))' frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen> </iframe > </div>
+<ng-template #elseBlock> <div class="example-element-symbol"><img [src]='sanitizer.bypassSecurityTrustResourceUrl(element.source)'></div></ng-template>
+<div class="example-element-name"> {{element.name}} </div>
         </div>
         <div class="example-element-description">
           {{element.source}}
