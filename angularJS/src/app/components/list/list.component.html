@@ -1,34 +1,40 @@
 <table mat-table
        [dataSource]="memes" multiTemplateDataRows
        class="mat-elevation-z8">
-  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-  </ng-container>
+  	<ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+		<th mat-header-cell *matHeaderCellDef> {{column}} </th>
+	    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+  	</ng-container>
 
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-      <div class="example-element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        <div class="example-element-diagram">
-<div class="example-element-symbol" *ngIf = 'isYoutube(element.source); else elseBlock'> <iframe width="560" height="315" [src]= 'sanitizer.bypassSecurityTrustResourceUrl(getId(element.source))' frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen> </iframe > </div>
-<ng-template #elseBlock> <div class="example-element-symbol"><img [src]='sanitizer.bypassSecurityTrustResourceUrl(element.source)'></div></ng-template>
-<div class="example-element-name"> {{element.name}} </div>
-        </div>
-        <div class="example-element-description">
-          {{element.source}}
-          <span class="example-element-description-attribution"> -- Wikipedia </span>
-        </div>
-      </div>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="expandedDetail">
+        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+	        <div class="example-element-detail"
+	           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+		        <div class="example-element-diagram">
+					<div class="example-element-symbol" *ngIf = 'isYoutube(element.source); else elseBlock'>
+						<iframe width="560" height="315" [src]= 'sanitizer.bypassSecurityTrustResourceUrl(getId(element.source))' frameborder="0" allow="autoplay; encrypted-media;" allowfullscreen> </iframe>
+					</div>
+					<ng-template #elseBlock>
+						<div class="example-element-symbol"><img [src]='sanitizer.bypassSecurityTrustResourceUrl(element.source)'></div>
+					</ng-template>
+		        </div>
+		        <div class="example-element-description">
+					<ul class="memeDescription">
+					  	<li>Name: {{element.name}}</li>
+					  	<li>Id: {{element._id}}</li>
+					  	<li>Source: {{element.source}}</li>
+					</ul>
+		        </div>
+		      </div>
+    	</td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-      class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
-  </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  	<tr mat-header-row *matHeaderRowDef="columnsToDisplay" class="header"></tr>
+	  	<tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+	      	class="example-element-row"
+	      	[class.example-expanded-row]="expandedElement === element"
+	      	(click)="expandedElement = expandedElement === element ? null : element">
+  	</tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>

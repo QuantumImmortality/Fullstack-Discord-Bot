@@ -63,7 +63,7 @@ export class ListComponent implements OnInit {
             }
 
             getId(url) {
-                return this.isYoutube(url) ? 'https://www.youtube.com/embed/' + this.isolateId(url) : url;
+                return this.isYoutube(url) ? 'http://www.youtube.com/embed/' + this.isolateId(url) : url;
             }
 	
 	   isYoutube(url){

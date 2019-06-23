@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class IssueService {
 	
-  uri = 'http://104.196.181.109:8080/api';
+  uri = 'http://memeserver.ga:8080/api';
 
   constructor(private http: HttpClient) { }
 
